@@ -1,0 +1,40 @@
+
+@media (max-width: 1100px)  {
+  .random-language {
+    width: 250px;
+  }
+
+  .quote-space {
+    width: 250px;
+  }
+}
+
+html {
+  background-color: rgba(135,206,235,0.9);
+  height: 85%;
+  width: 85%;
+  margin: 10% auto;
+}
+
+h2 {
+  color: black;
+  font-family: times;
+  font-size: 2em;
+}
+
+.page-header{
+
+}
+
+.weather-dock {
+  background-color: white;
+}
+
+.button {
+
+}
+
+#sky-icon {
+  margin: 1.75% auto;
+}
+
