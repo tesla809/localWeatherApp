@@ -1,5 +1,6 @@
 /*
 features to add:
+- modularize and turn into anonymous functions
 - add rest of info needed
 
 - style up to look better
@@ -17,7 +18,7 @@ features to add:
 var $citySearchField = $('#city-name');
 var citySearch = $('#city-name').val();
 var $submitButton = $('#submit');
-var unit = "metric";
+var unit = "imperial";
 
 // weather dock variables
 var $temperture = $('#temperture');
@@ -25,9 +26,20 @@ var $humidity = $('#humidity');
 var $sky = $('#sky');
 var $wind = $('#wind');
 
-// location and weather
+
+// gets location and weather of current location
 var currentLocation = findLocation();
 weatherQuery(currentLocation);
+
+// Unit: either metric or imperial
+$("input[name=standard]:radio").click(function(){
+  var $imperial = $("#imperial");
+  if($imperial.is(":checked")) {
+    unit = "imperial";
+  } else {
+    unit = "metric";
+  }
+}); //end metric/imperial selection 
 
 // one method of finding current location based on IP
 function findLocation(){
@@ -45,17 +57,6 @@ function findLocation(){
 } // end findLocation
 
 
-// Unit: either metric or imperial
-$("input[name=standard]:radio").click(function(){
-  var $imperial = $("#imperial");
-  if($imperial.is(":checked")) {
-    unit = "imperial";
-  } else {
-    unit = "metric";
-  }
-}); //end metric/imperial selection 
-
-
 function weatherQuery(city){
   var openWeatherAPI = 'https://crossorigin.me/http://api.openweathermap.org/data/2.5/weather?';
   var cityLookup = "q=" + city;
@@ -67,18 +68,21 @@ function weatherQuery(city){
   function openWeatherAPISuccess(data){
     // when successful, search button allowed again
     $citySearchField.prop("disabled", false);
-    $submitButton.attr("disabled", false).val('Go');
 
     var temp = data.main.temp;
     var humidity = data.main.humidity + "%";
+    var place = data.name;
+    place += ' ,' + data.sys.country;  
 
-    if(unit === "metric"){
-      temp += " C";
-    } else {
+    if(unit === "imperial"){
       temp += " F";
+    } else {
+      temp += " C";
     }
 
     // weather dock
+    // add location name
+    $citySearchField.text(place);
     $temperture.html('<li> Temp: ' +  temp +'</li>');
     $humidity.html('<li> humidity: ' + humidity +'</li>');
     $sky.html('<li>30</li>');
@@ -97,10 +101,14 @@ $($submitButton).click(function(evt){
 
   // disable search until we get data
   $citySearchField.prop("disabled", true);
-  $submitButton.attr("disabled", true).val('searching...');
 
   //query the weather
   citySearch = $('#city-name').val();
   weatherQuery(citySearch);
-}); // end submit
+});
+
+
+
+$("form").submit(function() { return false; });
+
 
