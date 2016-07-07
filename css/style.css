@@ -9,16 +9,26 @@
   }
 }
 
+* {
+  box-sizing:border-box;
+  transition:.25s ease-in-out;
+}
+
 html {
-  background-color: rgba(200,200,200,1);
   height: 85%;
   width: 85%;
   margin: 10% auto;
 }
 
-.content {
+body {
+  font-family: 'Roboto Mono', helvetica,arial,sans-serif;
+  font-size:14px;
+  line-height:16px;
+  font-weight:200;
+  color: black;
 
 }
+
 
 .content{
   text-align: center;
@@ -26,29 +36,85 @@ html {
 }
 
 .titles{
-  background-color: green;
+
 }
 
-h2 {
-  color: black;
-  font-family: times;
-  font-size: 2em;
+#heading-title {
+  font-size: 5em;
+  padding-bottom: 50px;
 }
 
-.weather-dock {
-  background-color: orange;
+
+* {
+  box-sizing:border-box;
+  transition:.25s ease-in-out;
+}
+
+
+body {
+  font-family: 'Roboto Mono',helvetica,arial,sans-serif;
+  font-size:14px;
+  line-height:16px;
+  font-weight:300;
+}
+
+
+#weather-dock {
+  padding-top: 1%;
+  padding-bottom: 10%;
+}
+
+ul {
+  list-style-type: none;
 }
 
 /*City form*/
 #city-form {
   margin: 0 auto;
+  color: white;
+}
+
+#city-name {
+  color: black;
+  background-color: white;
+  height: 15.5%;
+  width: 75%;
+  border-radius: 5px;  
+  margin-bottom: 5%;
+}
+
+#city-name:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(49, 79, 111, 0.2);
+}
+
+#submit{
+  position: relative;
+  color: black;
+  background-color: #C0C0C0;
+  padding: 25px;
+  top: 4px;
+  border-radius: 5px;
+}
+
+#submit:hover{
+  background-color: rgba(255,215,0,0.9);
+  padding: 28px;
 }
 
 input {
   font-size: 1.25em;
 }
 
-#sky-icon {
-  margin: 1.75% auto;
+#measurement {
+  background-color: blue;
 }
 
+#weather-dock {
+  background-color: grey;
+}
+
+#sky-icon {
+
+
+}
