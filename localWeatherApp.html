@@ -1,53 +1,57 @@
-<!DOCTYPE html>
 <html>
     <head>
       <title>Weather App</title>
+      <link href='https://fonts.googleapis.com/css?family=Roboto+Mono:400,100,300' rel='stylesheet' type='text/css'>
       <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" type="text/css" media="screen" title="no title" charset="utf-8">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
       <link rel="stylesheet" href="css/font.css" type="text/css" media="screen" title="no title" charset="utf-8">
       <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" title="no title" charset="utf-8">
       <meta name="viewport" content="initial-scale=1">
     </head>
 
-	<body>
+  <body>
       <div class="container-fluid content">
         <!-- Header -->
         <div class= "titles page-header text-center">
-          <h2>Free Code Camp</h2>
-          <h2>Weather App</h2>
+          <div id='heading-title'>FCC APP</div>
         </div>
         
         <!-- New City Dock -->
         <form class='text-center' id='city-form'>
+       
           <label>City</label>
-          <input name="city" placeholder="Ex. London, UK" id="city-name">
+  
+          <input name="city" placeholder=" " id="city-name">  
+          <i id="submit" class="fa fa-2x fa-search" aria-hidden="true"></i>      
 
-          <input id="submit" name="submit" type="submit" value="Go">
 
+          <!-- <input id="submit" name="submit" type="submit" value="..."> -->
+  
           </br>
-          <input type="radio" name="standard" value="Metric" checked>Metric
-          <input type="radio" name="standard" value="Imperial">Imperial
+          <div id="measurement">
+            Metric <input type="radio" name="standard" value="celsius" id="metric" checked>
+            Imperial <input type="radio" name="standard" value="fahrenheit" id= "imperial">
+          </div>
         </form>
 
         <!-- Weather Dock -->
-        <div class="weather-dock text-center">
+        <div id="weather-dock">
           <div class="row">
-            <div id="sky-icon">Sky Icon</div>
-          </div>
-
-          <div class="row">
-            <div id="location">Temperture</div>
-            <div id="location">Location</div>
-            <div id="sky-condition">Sky</div>
-            <div id="wind">Wind</div>
+            <ul>
+              <li id="sky-icon">Sky Icon</li>
+              <li id="temperture">Temperture</li>
+              <li id="humidity">humidity</li>             
+              <li id="sky">Sky</li>
+              <li id="wind">Wind</li>
+            </ul>
           </div>
         </div>
   </div>
   
   <script src="http://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
   <script src="https://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   <script src="js/howler.min.js" type="text/javascript" charset="utf-8"></script>
   <script src="js/weather.js" type="text/javascript" charset="utf-8"></script>
-
     </body>
 </html>
