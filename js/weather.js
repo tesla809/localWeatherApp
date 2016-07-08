@@ -31,6 +31,41 @@ var $wind = $('#wind');
 var currentLocation = findLocation();
 weatherQuery(currentLocation);
 
+//widget standard toggle
+(function(){
+  var $flipSwitch = $('.flipswitch');
+  // add text programmatically
+  $flipSwitch.text('Imperial');
+
+  //when flipSwitch is clicked ...
+  $($flipSwitch).click(function() {
+    // get clicked switch
+    var $clickedSwitch = $(this);
+    var spaceMove = 170;
+    var imperialColor = "black";
+    var metricColor = "rgb(121,170,225)";
+    
+    //if state is true, then move left to off
+    if ($clickedSwitch.attr('value') === 'true') {
+      $($clickedSwitch).animate({
+          left: spaceMove
+        })
+        .css("background-color", metricColor)
+        .text("Metric")
+        .attr('value', 'false');
+    } // if off, go back to 1st state.
+    else if ($clickedSwitch.attr('value') === 'false') {
+      $($clickedSwitch).animate({
+        //subtract movement 
+          left: spaceMove-spaceMove
+        })
+        .css("background-color", imperialColor)
+        .text("Imperial")
+        .attr('value', 'true');
+    }
+  });
+})();
+  
 // Unit: either metric or imperial
 $("input[name=standard]:radio").click(function(){
   var $imperial = $("#imperial");
@@ -40,6 +75,8 @@ $("input[name=standard]:radio").click(function(){
     unit = "metric";
   }
 }); //end metric/imperial selection 
+
+
 
 // one method of finding current location based on IP
 function findLocation(){

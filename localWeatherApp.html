@@ -10,22 +10,41 @@
     </head>
 
   <body>
-      <div class="container-fluid content">
+    <div class="container-fluid wrapper">
         <!-- Header -->
-        <div class= "titles page-header text-center">
-          <div id='heading-title'>FCC APP</div>
-        </div>
-        
+      <div class= "titles page-header text-center">
+        <div id='heading-title'>Weather</div>
+        <div id='heading-title'>Underground</div>
+      </div>     
+
         <!-- New City Dock -->
+        <!-- city form is wrapper that wraps around measurement toggle and search bar -->
         <form class='text-center' id='city-form'>
-          <label>City</label>
-          <input name="city" placeholder=" " id="city-name">  
-          <i id="submit" class="fa fa-2x fa-search" aria-hidden="true"></i>       
-          </br>
-          <div id="measurement">
-            Imperial <input type="radio" name="standard" value="fahrenheit" id="imperial" checked>
-            Metric <input type="radio" name="standard" value="celsius" id="metric" >
+          <label>City</label>            
+          <!-- wraps around seach area and measurements -->
+          <div id="search-space">
+            <!-- search area -->
+            <input name="city" placeholder=" " id="city-name">  
+            <i id="submit" class="fa fa-2x fa-search" aria-hidden="true"></i>   
           </div>
+
+          <!-- use rows to make it responsive -->
+          <!-- measurement toggle, still part of search space -->
+          <div id="measurement">
+            <div class="flip-switch-container">
+              <!-- one is the slider spot -->
+              <div class="slider">
+                <!-- the other is the switch -->
+                <!-- value holds state -->
+                <div id="widget-2" class="flipswitch" value="true"></div>
+              </div>
+            </div> 
+          </div>
+          <!--
+          keep to fix jquery for now
+          Imperial <input type="radio" name="standard" value="fahrenheit" id="imperial" class="standard-class" checked>
+          Metric <input type="radio" name="standard" value="celsius" id="metric" >
+          -->
         </form>
 
         <!-- Weather Dock -->
@@ -40,7 +59,8 @@
             </ul>
           </div>
         </div>
-  </div>
+
+    </div>
   
   <script src="http://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
   <script src="https://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script>
