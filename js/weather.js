@@ -18,7 +18,7 @@ features to add:
 var $citySearchField = $('#city-name');
 var citySearch = $('#city-name').val();
 var $submitButton = $('#submit');
-var unit = "imperial";
+var unit = 'imperial';
 
 // weather dock variables
 var $temperture = $('#temperture');
@@ -35,7 +35,7 @@ weatherQuery(currentLocation);
 (function(){
   var $flipSwitch = $('.flipswitch');
   // add text programmatically
-  $flipSwitch.text('Imperial');
+  $flipSwitch.html("<p>&#8457</p>");
 
   //when flipSwitch is clicked ...
   $($flipSwitch).click(function() {
@@ -51,7 +51,7 @@ weatherQuery(currentLocation);
           left: spaceMove
         })
         .css("background-color", metricColor)
-        .text("Metric")
+        .html("<p>&#8451</p>")
         .attr('value', 'false');
     } // if off, go back to 1st state.
     else if ($clickedSwitch.attr('value') === 'false') {
@@ -60,24 +60,13 @@ weatherQuery(currentLocation);
           left: spaceMove-spaceMove
         })
         .css("background-color", imperialColor)
-        .text("Imperial")
+        .html("<p>&#8457</p>")
         .attr('value', 'true');
     }
+
   });
 })();
   
-// Unit: either metric or imperial
-$("input[name=standard]:radio").click(function(){
-  var $imperial = $("#imperial");
-  if($imperial.is(":checked")) {
-    unit = "imperial";
-  } else {
-    unit = "metric";
-  }
-}); //end metric/imperial selection 
-
-
-
 // one method of finding current location based on IP
 function findLocation(){
   // location address API
@@ -95,7 +84,7 @@ function findLocation(){
 
 
 function weatherQuery(city){
-  var openWeatherAPI = 'https://crossorigin.me/http://api.openweathermap.org/data/2.5/weather?';
+  var openWeatherAPI = 'http://api.openweathermap.org/data/2.5/weather?';
   var cityLookup = "q=" + city;
   var unitType = "&units=" + unit;
   var apiKey = "&APPID=4c3a82148c102d600c31feb9ab9a3b94";
@@ -109,43 +98,53 @@ function weatherQuery(city){
     var temp = data.main.temp;
     var humidity = data.main.humidity + "%";
     var place = data.name;
-    place += ' ,' + data.sys.country;  
+    var clouds = data.clouds.all + "%";
+    var windSpeed = data.wind.speed;
+    var windDirection = data.wind.speed;
 
     if(unit === "imperial"){
-      temp += " F";
+      temp += "&#8457";
     } else {
-      temp += " C";
+      temp += "&#8451";
     }
 
     // weather dock
     // add location name
-    $citySearchField.text(place);
-    $temperture.html('<li> Temp: ' +  temp +'</li>');
-    $humidity.html('<li> humidity: ' + humidity +'</li>');
-    $sky.html('<li>30</li>');
-    $wind.html('<li>40</li>');
+    $temperture.html(temp);
+    $humidity.html(humidity);
+    $sky.html(clouds);
+    $wind.html(windSpeed);
   }
     
   // API callback
   $.getJSON(openWeatherPath, openWeatherAPISuccess);
 } // end weatherQuery
 
-
-// Run when go clicked and new location submitted
-$($submitButton).click(function(evt){
-  // prevent form from going to a new site.
+var searchAction = function(evt){
+    // prevent form from going to a new site.
   evt.preventDefault();
 
   // disable search until we get data
   $citySearchField.prop("disabled", true);
 
+  // get value at search time
+  unit = $('.flipswitch').attr('value');
+
+  // set unit
+  if(unit === 'true') {
+    unit = "imperial";
+  } else {
+    unit = "metric";
+  }
   //query the weather
   citySearch = $('#city-name').val();
   weatherQuery(citySearch);
+};
+
+// Run when go clicked and new location submitted
+$($submitButton).click(function(evt){
+  searchAction(evt);
 });
 
-
-
-$("form").submit(function() { return false; });
 
 

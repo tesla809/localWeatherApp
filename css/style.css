@@ -133,11 +133,38 @@ input {
 }
 
 #weather-dock {
-  background-color: grey;
   margin-top: 10%;
+  font-size: 1.5em;
+  line-height: 200%;
+  width: 550px;
 }
 
-#sky-icon {
+.weather-dock-line {
 
 
+}
+
+.weather-icon {
+  display: inline-block;
+  float: left;
+  margin-top: 5px;
+  margin-left: 225px;
+  font-size: 1.5em;
+}
+
+.data {
+  display: inline-block;
+  margin-right: 150px;
+}
+
+#humidity {
+  margin-right: 185px;
+}
+
+#sky {
+  margin-right: 195px;
+}
+
+#wind{
+  margin-right: 180px;
 }

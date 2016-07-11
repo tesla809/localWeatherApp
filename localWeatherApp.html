@@ -1,10 +1,13 @@
 <html>
     <head>
       <title>Weather App</title>
+      <meta charset="UTF-8">
       <link href='https://fonts.googleapis.com/css?family=Roboto+Mono:400,100,300' rel='stylesheet' type='text/css'>
       <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" type="text/css" media="screen" title="no title" charset="utf-8">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
       <link rel="stylesheet" href="css/font.css" type="text/css" media="screen" title="no title" charset="utf-8">
+      <link rel="stylesheet" href="weather-icons/css/weather-icons-wind.min.css" type="text/css" media="screen" title="no title" charset="utf-8">
+      <link rel="stylesheet" href="weather-icons/css/weather-icons.min.css" type="text/css" media="screen" title="no title" charset="utf-8">
       <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" title="no title" charset="utf-8">
       <meta name="viewport" content="initial-scale=1">
     </head>
@@ -51,11 +54,31 @@
         <div id="weather-dock">
           <div class="row">
             <ul>
-              <li id="sky-icon">Sky Icon</li>
-              <li id="temperture">Temperture</li>
-              <li id="humidity">humidity</li>             
-              <li id="sky">Sky</li>
-              <li id="wind">Wind</li>
+
+              <li class="weather-dock-line">
+                <div id="sky-icon"></div>
+              </li>
+              
+              <li class="weather-dock-line">
+                <i class="wi wi-thermometer weather-icon"></i>
+                <div id="temperture" class="data"></div>
+              </li>
+
+              <li class="weather-dock-line">
+              <i class="wi wi-humidity weather-icon"></i>
+                <div id="humidity" class="data"></div>
+              </li> 
+
+              <li class="weather-dock-line">
+                <i class="wi wi-cloudy weather-icon"></i>
+                <div id="sky" class="data"></div>
+              </li>
+
+              <li class="weather-dock-line">
+              <i class="wi wi-cloudy-gusts weather-icon"></i>
+                <div id="wind" class="data"></div>
+              </li>
+
             </ul>
           </div>
         </div>
