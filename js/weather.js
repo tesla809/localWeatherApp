@@ -84,7 +84,7 @@ weatherQuery(currentLocation);
         .html("<p>&#8457</p>")
         .attr('value', 'true');
     }
-    
+
   searchAction();
   console.log('Something');
 
@@ -108,8 +108,18 @@ function weatherQuery(city){
     var humidity = data.main.humidity + "%";
     var clouds = data.clouds.all + "%";
     var windSpeed = data.wind.speed;
-    var condition = JSON.stringify(data.weather);
-
+    var weather = JSON.stringify(data.weather);
+    var weatherHolder = "";
+    var weatherObj;
+    var condition;
+    // a hack to clean the data
+    // turn to string, eliminate the [] then turn into object again
+    for(var x = 1; x < weather.length - 1; x++){
+      weatherHolder += weather[x];
+    }
+    // weather object
+    weatherObj = JSON.parse(weatherHolder);
+    condition = weatherObj.main;
 
     if(unit === "imperial"){
       temp += "&#8457";
