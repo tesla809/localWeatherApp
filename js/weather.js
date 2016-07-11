@@ -21,15 +21,35 @@ var $submitButton = $('#submit');
 var unit = 'imperial';
 
 // weather dock variables
+var $condition = $('#condition');
 var $temperture = $('#temperture');
 var $humidity = $('#humidity');
 var $sky = $('#sky');
 var $wind = $('#wind');
 
 
+(function(){
+  // one method of finding current location based on IP
+  var findLocation = function(){
+  // location address API
+  // corsorigin.me to get around CORS issues in codepen
+  var getLocationAPI = 'http://ipinfo.io';
+  // success callback
+  function locationSuccess(data){
+    var location = data.city.toString() + ", " + data.country.toString();
+    // add location to field
+    $citySearchField.val(location);
+  }
+  // actual JSON call
+  $.getJSON(getLocationAPI,locationSuccess);
+}; // end findLocation
+
+
 // gets location and weather of current location
 var currentLocation = findLocation();
 weatherQuery(currentLocation);
+})();
+
 
 //widget standard toggle
 (function(){
@@ -63,24 +83,8 @@ weatherQuery(currentLocation);
         .html("<p>&#8457</p>")
         .attr('value', 'true');
     }
-
   });
 })();
-  
-// one method of finding current location based on IP
-function findLocation(){
-  // location address API
-  // corsorigin.me to get around CORS issues in codepen
-  var getLocationAPI = 'https://crossorigin.me/http://ipinfo.io';
-  // success callback
-  function locationSuccess(data){
-    var location = data.city.toString() + ", " + data.country.toString();
-    // add location to field
-    $citySearchField.val(location);
-  }
-  // actual JSON call
-  $.getJSON(getLocationAPI,locationSuccess);
-} // end findLocation
 
 
 function weatherQuery(city){
@@ -97,10 +101,10 @@ function weatherQuery(city){
 
     var temp = data.main.temp;
     var humidity = data.main.humidity + "%";
-    var place = data.name;
     var clouds = data.clouds.all + "%";
     var windSpeed = data.wind.speed;
-    var windDirection = data.wind.speed;
+    var condition = JSON.stringify(data.weather);
+
 
     if(unit === "imperial"){
       temp += "&#8457";
@@ -114,6 +118,7 @@ function weatherQuery(city){
     $humidity.html(humidity);
     $sky.html(clouds);
     $wind.html(windSpeed);
+    $condition.html(condition);
   }
     
   // API callback
@@ -146,5 +151,13 @@ $($submitButton).click(function(evt){
   searchAction(evt);
 });
 
+$($citySearchField).on('keyup keypress', function(evt) {
+  var keyCode = evt.keyCode || evt.which;
+  if (keyCode === 13) { 
+    evt.preventDefault();
+    searchAction(evt);  
+    return false;
+  }
+});
 
 
