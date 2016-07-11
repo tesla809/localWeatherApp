@@ -27,7 +27,7 @@ var $humidity = $('#humidity');
 var $sky = $('#sky');
 var $wind = $('#wind');
 
-
+// anon function to find location
 (function(){
   // one method of finding current location based on IP
   var findLocation = function(){
@@ -44,14 +44,15 @@ var $wind = $('#wind');
   $.getJSON(getLocationAPI,locationSuccess);
 }; // end findLocation
 
-
 // gets location and weather of current location
 var currentLocation = findLocation();
+currentLocal = currentLocation;
+// calls for location
 weatherQuery(currentLocation);
 })();
 
 
-//widget standard toggle
+//widget F/C toggle
 (function(){
   var $flipSwitch = $('.flipswitch');
   // add text programmatically
@@ -83,6 +84,10 @@ weatherQuery(currentLocation);
         .html("<p>&#8457</p>")
         .attr('value', 'true');
     }
+    
+  searchAction();
+  console.log('Something');
+
   });
 })();
 
@@ -126,8 +131,6 @@ function weatherQuery(city){
 } // end weatherQuery
 
 var searchAction = function(evt){
-    // prevent form from going to a new site.
-  evt.preventDefault();
 
   // disable search until we get data
   $citySearchField.prop("disabled", true);
