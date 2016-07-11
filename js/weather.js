@@ -47,7 +47,8 @@ var $wind = $('#wind');
 // gets location and weather of current location
 var currentLocation = findLocation();
 currentLocal = currentLocation;
-// calls for location
+
+// Calls for location
 weatherQuery(currentLocation);
 })();
 
@@ -108,6 +109,7 @@ function weatherQuery(city){
     var humidity = data.main.humidity + "%";
     var clouds = data.clouds.all + "%";
     var windSpeed = data.wind.speed;
+
     var weather = JSON.stringify(data.weather);
     var weatherHolder = "";
     var weatherObj;
@@ -123,8 +125,11 @@ function weatherQuery(city){
 
     if(unit === "imperial"){
       temp += "&#8457";
+      windSpeed += ' f/s';
+
     } else {
       temp += "&#8451";
+      windSpeed += 'm/s';
     }
 
     // weather dock
@@ -141,7 +146,6 @@ function weatherQuery(city){
 } // end weatherQuery
 
 var searchAction = function(evt){
-
   // disable search until we get data
   $citySearchField.prop("disabled", true);
 
