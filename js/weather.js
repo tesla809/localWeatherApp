@@ -22,7 +22,7 @@ var unit = 'imperial';
 
 // weather dock variables
 var $condition = $('#condition');
-var $variableConditionIcon = $('#variable-weather-condition-icon');
+var $variableWeatherConditionIcon = $('#variable-weather-condition-icon');
 var $temperture = $('#temperture');
 var $humidity = $('#humidity');
 var $sky = $('#sky');
@@ -93,6 +93,7 @@ weatherQuery(currentLocation);
 })();
 
 
+
 function weatherQuery(city){
   var openWeatherAPI = 'http://api.openweathermap.org/data/2.5/weather?';
   var cityLookup = "q=" + city;
@@ -100,19 +101,35 @@ function weatherQuery(city){
   var apiKey = "&APPID=4c3a82148c102d600c31feb9ab9a3b94";
   var openWeatherPath = openWeatherAPI+ cityLookup + unitType + apiKey;
 
-  // key value pair of weather icon - condition
-  var iconList = {
-    'clear sky' : 'wi-day-sunny',
-    'few clouds' : 'wi-day-cloudy',
-    'scattered clouds' : 'wi-day-cloudy',
-    'broken clouds' : 'wi-day-cloudy',
-    'shower rain' : 'wi-day-showers',
-    'rain' : 'wi-day-rain',
-    'thunderstorm' : 'wi-day-snow-thunderstorm',
-    'snow' : 'wi-day-snow',
-    'mist' : 'wi-day-fog',
-    'tornado' : 'wi-tornado'
-  };
+
+  function variableIcon(condition){
+    var weather;
+
+    // key value pair of weather icon - condition
+    var iconList = {
+      'clear sky' : 'wi-day-sunny',
+      'clear' : 'wi-day-sunny',
+      'few clouds' : 'wi-day-cloudy',
+      'scattered clouds' : 'wi-day-cloudy',
+      'clouds' : 'wi-day-cloudy',
+      'broken clouds' : 'wi-day-cloudy',
+      'shower rain' : 'wi-day-showers',
+      'rain' : 'wi-day-rain',
+      'thunderstorm' : 'wi-day-snow-thunderstorm',
+      'snow' : 'wi-day-snow',
+      'mist' : 'wi-day-fog',
+      'tornado' : 'wi-tornado'
+    };
+
+    // decide condition
+    if (iconList.hasOwnProperty(condition) === true){
+        weather = iconList[condition];
+    } else {
+      // to prevent icon from being the same when changing city and conditions are not met.
+      weather = 'nothing';
+    }
+    return weather;
+  }
 
   // API callback
   function openWeatherAPISuccess(data){
@@ -128,16 +145,21 @@ function weatherQuery(city){
     var weatherHolder = "";
     var weatherObj;
     var condition;
+    var variableWeather;
     
     // a hack to clean the data
     // turn to string, eliminate the [] then turn into object again
     for(var x = 1; x < weather.length - 1; x++){
       weatherHolder += weather[x];
     }
-    // weather object
+    
+    // getting description for weather object
     weatherObj = JSON.parse(weatherHolder);
     condition = weatherObj.main;
+    condition = condition.toLowerCase();
+    variableWeather = variableIcon(condition);
 
+    // decide standard
     if(unit === "imperial"){
       temp += "&#8457";
       windSpeed += ' f/s';
@@ -147,13 +169,14 @@ function weatherQuery(city){
       windSpeed += 'm/s';
     }
 
-    // weather dock
-    // add location name
+
+    // add info to weather dock 
     $temperture.html(temp);
     $humidity.html(humidity);
     $sky.html(clouds);
     $wind.html(windSpeed);
     $condition.html(condition);
+    $variableWeatherConditionIcon.html("<i class='wi weather-icon " + variableWeather +" 'id='variable-weather-condition-icon'></i>");
   }
     
   // API callback
