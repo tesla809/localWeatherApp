@@ -22,6 +22,7 @@ var unit = 'imperial';
 
 // weather dock variables
 var $condition = $('#condition');
+var $variableConditionIcon = $('#variable-weather-condition-icon');
 var $temperture = $('#temperture');
 var $humidity = $('#humidity');
 var $sky = $('#sky');
