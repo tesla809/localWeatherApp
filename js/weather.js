@@ -87,8 +87,6 @@ weatherQuery(currentLocation);
     }
 
   searchAction();
-  console.log('Something');
-
   });
 })();
 
@@ -99,6 +97,10 @@ function weatherQuery(city){
   var unitType = "&units=" + unit;
   var apiKey = "&APPID=4c3a82148c102d600c31feb9ab9a3b94";
   var openWeatherPath = openWeatherAPI+ cityLookup + unitType + apiKey;
+
+  // key value pair of weather icon - condition
+  var iconList = {
+  };
 
   // API callback
   function openWeatherAPISuccess(data){
@@ -114,6 +116,7 @@ function weatherQuery(city){
     var weatherHolder = "";
     var weatherObj;
     var condition;
+    
     // a hack to clean the data
     // turn to string, eliminate the [] then turn into object again
     for(var x = 1; x < weather.length - 1; x++){
@@ -177,4 +180,6 @@ $($citySearchField).on('keyup keypress', function(evt) {
   }
 });
 
+
+// background chanage based on weather
 
