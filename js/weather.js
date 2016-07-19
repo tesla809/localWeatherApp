@@ -54,6 +54,7 @@ weatherQuery(currentLocation);
 
 
 //widget F/C toggle
+//need to clean up JS and take out css.
 (function(){
   var $flipSwitch = $('.flipswitch');
   // add text programmatically
@@ -100,6 +101,16 @@ function weatherQuery(city){
 
   // key value pair of weather icon - condition
   var iconList = {
+    'clear sky' : 'wi-day-sunny',
+    'few clouds' : 'wi-day-cloudy',
+    'scattered clouds' : 'wi-day-cloudy',
+    'broken clouds' : 'wi-day-cloudy',
+    'shower rain' : 'wi-day-showers',
+    'rain' : 'wi-day-rain',
+    'thunderstorm' : 'wi-day-snow-thunderstorm',
+    'snow' : 'wi-day-snow',
+    'mist' : 'wi-day-fog',
+    'tornado' : 'wi-tornado'
   };
 
   // API callback
